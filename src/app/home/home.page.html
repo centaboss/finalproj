@@ -1,0 +1,59 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="custom-header">
+    <ion-title class="ion-text-center">IT - WIZ 3A Edition</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content id="main-content" class="main-bg">
+  
+  <div class="welcome-card">
+    <h1 class="main-title">Welcome to the IT-WIZ 3A Edition</h1>
+    <p class="description">
+      This application is created to help you review and strengthen your knowledge
+      from our class lessons. It includes categorized multiple-choice questions
+      covering core subjects such as IT-IMO1, IT-IPT01, IT-IPT02, IT-IAS01, and IT-SA01. 
+      Answer the questions at your own pace and track your learning progress through focused, quiz-based study.
+    </p>
+  </div>
+
+  <div class="interaction-container">
+    <h2 class="tagline">Syntax check complete. Execute the learning.</h2>
+
+    <div class="input-wrapper">
+      <ion-input
+        [(ngModel)]="username"
+        placeholder="Enter your name"
+        class="custom-input"
+      ></ion-input>
+    </div>
+
+    <ion-button expand="block" class="start-btn" (click)="startQuiz()">
+      START QUIZ
+    </ion-button>
+
+    <ion-button expand="block" class="about-btn" [routerLink]="['/about-us']">
+      ABOUT US
+    </ion-button>
+
+  <div class="scores-section" *ngIf="scoreHistory.length > 0">
+      <h3>Past Scores</h3>
+      <ion-list class="score-list">
+        <ion-item *ngFor="let record of scoreHistory" lines="none" class="score-item">
+          <ion-label>
+            <h2 class="score-category">
+              <span class="user-name-highlight">{{ username }}</span> 
+              <span class="separator">|</span> 
+              {{ record.category }}
+            </h2>
+            <p class="score-details">
+              {{ record.score }} / {{ record.total }} • {{ record.date }}
+            </p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
+
+    <div class="circuit-decoration"></div>
+  </div>
+
+</ion-content>

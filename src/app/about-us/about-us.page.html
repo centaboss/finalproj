@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>About Us</ion-title>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding about-content">
+  
+  <div class="header-container ion-text-center">
+    <h2>Meet the Team</h2>
+    <p>The minds behind IT-WIZ 3A Edition</p>
+  </div>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" size-md="4" *ngFor="let member of teamMembers">
+        <ion-card class="member-card">
+          <div class="avatar-container">
+            <ion-avatar class="profile-image">
+              <img [src]="member.image" alt="{{ member.name }}" />
+            </ion-avatar>
+          </div>
+          
+          <ion-card-header class="ion-text-center">
+            <ion-card-title>{{ member.name }}</ion-card-title>
+            <ion-card-subtitle>{{ member.role }}</ion-card-subtitle>
+          </ion-card-header>
+
+          <ion-card-content class="ion-text-center">
+            {{ member.description }}
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>
