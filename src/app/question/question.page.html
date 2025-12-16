@@ -1,0 +1,93 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title class="ion-text-center">{{ categoryName }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <div *ngIf="!showResult">
+    <div class="question-header">
+      
+      <div *ngIf="isTimeAttack; else regularMode" class="question-number-circle time-attack">
+        <span class="circle-time">{{ timeLeft }}</span>
+        <span class="circle-label">TIME</span>
+      </div>
+      <ng-template #regularMode>
+        <div class="question-number-circle regular-mode">
+          <span class="circle-number">{{ currentQuestionIndex + 1 | number: '2.0' }}</span>
+        </div>
+      </ng-template>
+
+      <h3 class="category-name-small">{{ categoryName }}</h3>
+    </div>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title class="ion-text-center question-text">
+          {{ currentQuestion.question }}
+        </ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-list lines="none">
+          <ion-item
+            *ngFor="let choice of currentQuestion.choices; let i = index"
+            button
+            (click)="selectAnswer(i)"
+            [color]="selectedAnswer === i ? 'primary' : 'light'"
+            class="choice-item">
+            {{ choice }}
+          </ion-item>
+        </ion-list>
+
+        <ion-button
+          expand="block"
+          class="next-button"
+          [disabled]="selectedAnswer === null"
+          (click)="nextQuestion()">
+          NEXT
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+
+  <div *ngIf="showResult" class="ion-text-center result-container">
+    <h2>🎉 Quiz Completed!</h2>
+    
+    <div [ngSwitch]="true" class="ion-margin-bottom">
+      <h2 *ngSwitchCase="score === totalQuestions" style="color: gold;">🏆 Perfect!</h2>
+      <h2 *ngSwitchCase="score > (totalQuestions / 2)" style="color: green;">👍 Good Job!</h2>
+      <h2 *ngSwitchDefault style="color: tomato;">📚 Study More!</h2>
+    </div>
+
+    <p class="score-text">
+      Your Score: <strong>{{ score }}</strong> / {{ totalQuestions }}
+    </p>
+
+    <h3>Review Answers:</h3>
+    <ion-list>
+      <ion-item *ngFor="let q of questions; let i = index">
+        <ion-label class="ion-text-wrap">
+          <strong>Q{{ i + 1 }}:</strong> {{ q.question }}
+          <p>
+            Your: 
+            <span [style.color]="selectedAnswers[i] === q.answer ? 'green' : 'red'">
+              {{ getUserAnswer(i) }}
+            </span>
+          </p>
+          <p style="color: green">Correct: {{ q.choices[q.answer] }}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+
+    <ion-button expand="block" color="primary" (click)="retryQuiz()">
+      🔄 Retry This Category
+    </ion-button>
+    <ion-button expand="block" color="medium" (click)="returnCategory()">
+       Return to Categories  
+    </ion-button>
+  </div>
+
+</ion-content>

@@ -1,259 +1,45 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { QUESTIONS, Question } from '../questions';
 import { GlobalData } from '../services/global-data';
-import { ToastController } from '@ionic/angular';
-import { CommonModule, DecimalPipe } from '@angular/common'; // <-- DecimalPipe added here
-import { FormsModule } from '@angular/forms';
-
+import { CommonModule } from '@angular/common';
 import {
-  IonContent,
-  IonHeader,
-  IonToolbar,
-  IonTitle,
-  IonButton,
-  IonCard,
-  IonCardHeader,
-  IonCardTitle,
-  IonCardContent,
-  IonList,
-  IonItem,
-  IonMenu,
-  IonBackButton,
-  IonButtons,
-  IonLabel,
-  IonGrid,
-  IonRow,
-  IonCol,
-  IonMenuButton, // <-- Added Menu Button here
+  IonContent, IonHeader, IonToolbar, IonTitle, IonButton,
+  IonButtons, IonMenuButton, IonBackButton, IonGrid, IonRow, IonCol,
+  IonMenu, IonList, IonItem
 } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-quiz',
-  standalone: true,
   templateUrl: './quiz.page.html',
   styleUrls: ['./quiz.page.scss'],
+  standalone: true,
   imports: [
     CommonModule,
-    FormsModule,
-    DecimalPipe, // <-- Now correctly listed in the imports array
-    IonContent,
-    IonHeader,
-    IonToolbar,
-    IonTitle,
-    IonButton,
-    IonCard,
-    IonCardHeader,
-    IonCardTitle,
-    IonCardContent,
-    IonList,
-    IonItem,
-    IonMenu,
-    IonBackButton,
-    IonButtons,
-    IonLabel,
-    IonGrid,
-    IonRow,
-    IonCol,
-    IonMenuButton, // <-- Also added to imports array
+    IonContent, IonHeader, IonToolbar, IonTitle, IonButton,
+    IonButtons, IonMenuButton, IonBackButton, IonGrid, IonRow, IonCol,
+    IonMenu, IonList, IonItem
   ],
 })
 export class QuizPage implements OnInit {
   username = '';
-  categories = ['IT-IPT01', 'IT-IPT02', 'IT-IAS01', 'IT-SA01', 'IT-IMO1']; 
-  selectedCategory = '';
-  questions: Question[] = [];
-  randomizedQuestions: Question[] = [];
-  currentQuestionIndex = 0;
-  // Initializing currentQuestion here to prevent potential 'undefined' errors before loadQuestion is called
-  currentQuestion: Question = { 
-    question: 'Loading...', 
-    choices: ['Choice 1', 'Choice 2', 'Choice 3', 'Choice 4'], 
-    answer: 0, 
-    category: '' 
-  };
-  selectedAnswer: number | null = null;
-  selectedAnswers: (number | null)[] = [];
-  score = 0;
-  showResult = false;
-  isTimeAttack = false;
-  timeLeft = 60;
-  timerInterval: any;
-  selectedAnswerIndex: number | null = null;
+  categories = ['IT-IPT01', 'IT-IPT02', 'IT-IAS01', 'IT-SA01', 'IT-IMO1'];
 
-  constructor(
-    private global: GlobalData,
-    private toastCtrl: ToastController,
-    private router: Router
-  ) {}
-
-  // When the user clicks "Next"
-  async nextQuestion() {
-    if (this.selectedAnswer === null) return;
-
-    // Save the user's answer
-    this.selectedAnswers[this.currentQuestionIndex] = this.selectedAnswer;
-
-    // Check if correct and update score
-    const isCorrect = this.selectedAnswer === this.currentQuestion.answer;
-    if (isCorrect) this.score++;
-
-    // Show toast
-    const toast = await this.toastCtrl.create({
-      message: isCorrect ? 'Correct! 🎉' : 'Incorrect ❌',
-      duration: 800,
-      color: isCorrect ? 'success' : 'danger',
-    });
-    toast.present();
-
-    // Move to next question after toast
-    setTimeout(() => {
-      this.currentQuestionIndex++;
-      this.selectedAnswer = null; // reset for next question
-      this.loadQuestion();
-    }, 800);
-  }
+  constructor(private global: GlobalData, private router: Router) {}
 
   ngOnInit() {
     this.username = this.global.getUsername();
   }
 
-  /* Start a normal quiz category */
-  startQuiz(category: string) {
-    this.reset();
-    this.selectedCategory = category;
-    // Assuming QUESTIONS array and Question interface are correctly defined elsewhere
-    this.questions = QUESTIONS.filter((q) => q.category === category); 
-    
-    if (this.questions.length === 0) {
-      // Fallback if category has no questions
-      this.currentQuestion = { 
-        question: 'No questions found for this category.', 
-        choices: [], 
-        answer: -1, 
-        category: category 
-      };
-      this.randomizedQuestions = [];
-      this.showToast('No questions available in this category.', 'warning');
-      return; 
-    }
-    
-    this.randomizedQuestions = this.shuffle(this.questions);
-    this.selectedAnswers = [];
-    this.currentQuestionIndex = 0;
-    this.loadQuestion();
+  // Helper for colors (Switch statement logic can go here or in HTML)
+  getCategoryColor(cat: string): string {
+    if (cat === 'IT-IMO1') return 'primary';
+    if (cat === 'IT-IPT02') return 'tertiary';
+    if (cat === 'IT-SA01') return 'dark';
+    return 'secondary';
   }
 
-  /* Start Time Attack mode */
-  startTimeAttack() {
-    this.reset();
-    this.isTimeAttack = true;
-    this.selectedCategory = 'Time Attack Mode ⏱️';
-    this.randomizedQuestions = this.shuffle(QUESTIONS).slice(0, 10);
-    this.selectedAnswers = [];
-    this.timeLeft = 60;
-    this.currentQuestionIndex = 0;
-
-    this.timerInterval = setInterval(() => {
-      this.timeLeft--;
-      if (this.timeLeft <= 0) this.endQuiz();
-    }, 1000);
-
-    this.loadQuestion();
-  }
-
-  /* Shuffle array helper */
-  shuffle(array: any[]) {
-    return array.slice().sort(() => Math.random() - 0.5);
-  }
-
-  /* Load the current question */
-  loadQuestion() {
-    if (this.currentQuestionIndex >= this.randomizedQuestions.length) {
-      this.endQuiz();
-      return;
-    }
-    // This line is key: ensures the currentQuestion object is updated
-    this.currentQuestion = this.randomizedQuestions[this.currentQuestionIndex]; 
-    this.selectedAnswer =
-      this.selectedAnswers[this.currentQuestionIndex] ?? null;
-  }
-
-  /* Handle answer selection */
-  selectAnswer(index: number) {
-    this.selectedAnswer = index;
-  }
-
-  /* End the quiz and save score */
-  endQuiz() {
-    this.showResult = true;
-    clearInterval(this.timerInterval);
-
-    this.global.addScore({
-      category: this.selectedCategory,
-      score: this.score,
-      total: this.randomizedQuestions.length,
-      date: new Date().toLocaleString(),
-    });
-  }
-
-  /* Retry the same category or time attack */
-  retryQuiz() {
-    if (this.isTimeAttack) this.startTimeAttack();
-    else this.startQuiz(this.selectedCategory);
-  }
-
-  /* Go back to category selection from quiz */
-  goBackToCategories() {
-    clearInterval(this.timerInterval);
-    this.selectedCategory = '';
-    this.showResult = false;
-    this.score = 0;
-    this.currentQuestionIndex = 0;
-    this.isTimeAttack = false;
-    this.timeLeft = 60;
-    this.selectedAnswers = [];
-  }
-
-  /* Custom back button handler */
-  goBack(event?: Event) {
-    if (event) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
-
-    if (this.selectedCategory) {
-      this.goBackToCategories();
-    } else {
-      this.router.navigate(['/home']);
-    }
-  }
-
-  /* Reset all quiz data */
-  reset() {
-    clearInterval(this.timerInterval);
-    this.selectedCategory = '';
-    this.showResult = false;
-    this.score = 0;
-    this.currentQuestionIndex = 0;
-    this.isTimeAttack = false;
-    this.timeLeft = 60;
-    this.selectedAnswers = [];
-  }
-
-  /* Return the user's answer text safely */
-  getUserAnswer(i: number): string {
-    const answerIndex = this.selectedAnswers[i];
-    if (answerIndex == null) return 'No answer';
-    return this.randomizedQuestions[i].choices[answerIndex];
-  }
-
-  async showToast(message: string, color: string) {
-    const toast = await this.toastCtrl.create({
-      message: message,
-      duration: 2000,
-      color: color,
-    });
-    toast.present();
+  goToQuestion(category: string) {
+    // Navigate to the Question Page and pass the category
+    this.router.navigate(['/question', category]);
   }
 }

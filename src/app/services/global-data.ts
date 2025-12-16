@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
 export interface ScoreRecord {
+  username: string;
   category: string;
   score: number;
   total: number;

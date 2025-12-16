@@ -4,11 +4,9 @@
       <ion-title>Menu</ion-title>
     </ion-toolbar>
   </ion-header>
-
   <ion-content>
     <ion-list>
       <ion-item routerLink="/home">Home</ion-item>
-      <ion-item (click)="goBackToCategories()">Restart Quiz</ion-item>
     </ion-list>
   </ion-content>
 </ion-menu>
@@ -18,7 +16,7 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/home"></ion-back-button>
     </ion-buttons>
-    <ion-title class="ion-text-center">IT-WIZ Quiz</ion-title>
+    <ion-title class="ion-text-center">Select Topic</ion-title>
     <ion-buttons slot="end">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
@@ -26,31 +24,19 @@
 </ion-header>
 
 <ion-content id="quiz-content" class="ion-padding">
-  <div *ngIf="!selectedCategory" class="ion-text-center welcome-container">
+  <div class="ion-text-center welcome-container">
     <h2>Hello, {{ username }}! 👋</h2>
     <p>Select a category to start your quiz:</p>
 
     <div class="category-grid">
       <ion-grid>
         <ion-row class="ion-justify-content-center">
-          <ion-col
-            size="6"
-            *ngFor="let cat of categories"
-          >
+          <ion-col size="6" *ngFor="let cat of categories">
             <ion-button
               expand="block"
               class="category-button"
-              [color]="
-                cat === 'IT-IMO1'
-                  ? 'primary'
-                  : cat === 'IT-IPT02'
-                  ? 'tertiary'
-                  : cat === 'IT-SA01'
-                  ? 'dark'
-                  : 'secondary'
-              "
-              (click)="startQuiz(cat)"
-            >
+              [color]="getCategoryColor(cat)"
+              (click)="goToQuestion(cat)">
               {{ cat }}
             </ion-button>
           </ion-col>
@@ -62,95 +48,12 @@
               expand="block"
               color="secondary"
               class="time-attack-button"
-              (click)="startTimeAttack()"
-            >
+              (click)="goToQuestion('Time Attack')">
               ⏱️ Time Attack Mode
             </ion-button>
           </ion-col>
         </ion-row>
       </ion-grid>
     </div>
-  </div>
-
-  <div *ngIf="selectedCategory && !showResult">
-    <div class="question-header">
-      <div *ngIf="isTimeAttack; else regularMode" class="question-number-circle time-attack">
-        <span class="circle-time">{{ timeLeft }}</span>
-        <span class="circle-label">TIME</span>
-      </div>
-
-      <ng-template #regularMode>
-        <div class="question-number-circle regular-mode">
-          <span class="circle-number">{{ currentQuestionIndex + 1 | number: '2.0' }}</span>
-        </div>
-      </ng-template>
-
-      <h3 class="category-name-small">{{ selectedCategory }}</h3>
-    </div>
-
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title class="ion-text-center question-text">
-          {{ currentQuestion.question }} 
-        </ion-card-title>
-      </ion-card-header>
-
-      <ion-card-content>
-        <ion-list lines="none">
-          <ion-item
-            *ngFor="let choice of currentQuestion.choices; let i = index"
-            button
-            (click)="selectAnswer(i)"
-            [color]="selectedAnswer === i ? 'primary' : 'secondary-light'"
-            class="choice-item"
-          >
-            {{ choice }}
-          </ion-item>
-        </ion-list>
-
-        <ion-button
-          expand="block"
-          [disabled]="selectedAnswer === null"
-          (click)="nextQuestion()"
-          class="next-button"
-        >
-          NEXT
-        </ion-button>
-      </ion-card-content>
-    </ion-card>
-  </div>
-
-  <div *ngIf="showResult" class="ion-text-center result-container">
-    <h2>🎉 Quiz Completed!</h2>
-    <p class="score-text">
-      Your Score:
-      <strong>{{ score }}</strong> / {{ randomizedQuestions.length }}
-    </p>
-
-    <h3>Review Answers:</h3>
-    <ion-list>
-      <ion-item *ngFor="let q of randomizedQuestions; let i = index">
-        <ion-label>
-          <strong>Q{{ i + 1 }}:</strong> {{ q.question }}
-          <p>
-            Your answer:
-            <span
-              [style.color]="selectedAnswers[i] === q.answer ? 'green' : 'red'"
-            >
-              {{ getUserAnswer(i) }}
-            </span>
-          </p>
-
-          <p style="color: green">Correct answer: {{ q.choices[q.answer] }}</p>
-        </ion-label>
-      </ion-item>
-    </ion-list>
-
-    <ion-button expand="block" color="primary" (click)="retryQuiz()">
-      🔄 Retry This Category
-    </ion-button>
-    <ion-button expand="block" color="medium" (click)="goBackToCategories()">
-      🏠 Back to Categories
-    </ion-button>
   </div>
 </ion-content>

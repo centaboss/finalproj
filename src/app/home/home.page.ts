@@ -63,19 +63,21 @@ export class HomePage implements ViewWillEnter { // Implement the interface
     console.log('Scores refreshed:', this.scoreHistory); // Debugging log
   }
 
-  async startQuiz() {
+async startQuiz() {
     if (!this.username.trim()) {
       const toast = await this.toastCtrl.create({
         message: 'Please enter your name!',
-        duration: 1500,
+        duration: 3000,
         color: 'danger',
       });
       toast.present();
       return;
     }
 
-    // Set the username in the global service before navigating
+    // Set the username in the global service
     this.global.setUsername(this.username);
-    this.router.navigate(['/quiz']);
+    
+    // FIX: Navigate to the Quiz Menu (no ID needed here yet)
+    this.router.navigate(['/quiz']); 
   }
 }

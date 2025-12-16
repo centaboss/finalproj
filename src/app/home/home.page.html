@@ -35,13 +35,13 @@
       ABOUT US
     </ion-button>
 
-  <div class="scores-section" *ngIf="scoreHistory.length > 0">
+<div class="scores-section" *ngIf="scoreHistory.length > 0">
       <h3>Past Scores</h3>
       <ion-list class="score-list">
         <ion-item *ngFor="let record of scoreHistory" lines="none" class="score-item">
           <ion-label>
             <h2 class="score-category">
-              <span class="user-name-highlight">{{ username }}</span> 
+              <span class="user-name-highlight">{{ record.username }}</span> 
               <span class="separator">|</span> 
               {{ record.category }}
             </h2>
