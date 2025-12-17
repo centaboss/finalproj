@@ -1,0 +1,38 @@
+/* Main Background */
+.main-bg {
+  --background: 
+    linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
+    url('/assets/backgroundhome.jpg') center / cover no-repeat;
+  
+  color: white;
+}
+
+
+.category-name-small{
+    font-size: 50px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.circle-number, .circle-time {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: #007bff;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin: 0 auto;       /* centers the circle itself */
+    font-size: 30px;
+}
+
+/* Center the label below the circle */
+.circle-label {
+    font-size: 30px;
+    text-align: center;    /* centers text inside the element */
+    display: block;        /* ensure block element */
+    width: 100%;           /* make it span full width of parent */
+    margin: 20px auto 0 auto; /* top spacing + horizontally centered */
+}

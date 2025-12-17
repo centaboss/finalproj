@@ -1,11 +1,14 @@
-<ion-header class="ion-no-border">
+
+
+<ion-content fullscreen class="main-bg">
+
+  <ion-header class="ion-no-border">
   <ion-toolbar class="custom-header">
     <ion-title class="ion-text-center">IT - WIZ 3A Edition</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content id="main-content" class="main-bg">
-  
+  <!-- Welcome Section -->
   <div class="welcome-card">
     <h1 class="main-title">Welcome to the IT-WIZ 3A Edition</h1>
     <p class="description">
@@ -16,6 +19,7 @@
     </p>
   </div>
 
+  <!-- Interaction Section -->
   <div class="interaction-container">
     <h2 class="tagline">Syntax check complete. Execute the learning.</h2>
 
@@ -27,16 +31,18 @@
       ></ion-input>
     </div>
 
-    <ion-button expand="block" class="start-btn" (click)="startQuiz()">
-      START QUIZ
-    </ion-button>
+ <ion-button expand="block" class="primary-btn" (click)="startQuiz()">
+  START QUIZ
+</ion-button>
 
-    <ion-button expand="block" class="about-btn" [routerLink]="['/about-us']">
-      ABOUT US
-    </ion-button>
+<ion-button expand="block" class="primary-btn about-spacing" [routerLink]="['/about-us']">
+  ABOUT US
+</ion-button>
 
-<div class="scores-section" *ngIf="scoreHistory.length > 0">
-      <h3>Past Scores</h3>
+
+    <!-- Scores Section -->
+    <div class="scores-section" *ngIf="scoreHistory.length > 0">
+      <h3>PREVIOUS PLAYER</h3>
       <ion-list class="score-list">
         <ion-item *ngFor="let record of scoreHistory" lines="none" class="score-item">
           <ion-label>

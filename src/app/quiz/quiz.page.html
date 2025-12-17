@@ -7,12 +7,13 @@
   <ion-content>
     <ion-list>
       <ion-item [routerLink]="['/home']">Home</ion-item>
+      <ion-item [routerLink]="['/about-us']">About Us</ion-item>
     </ion-list>
   </ion-content>
 </ion-menu>
 
-<ion-header>
-  <ion-toolbar color="primary">
+<ion-header class="ion-no-border select-topic-header">
+  <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/home"></ion-back-button>
     </ion-buttons>
@@ -23,9 +24,10 @@
   </ion-toolbar>
 </ion-header>
 
+
 <ion-content id="quiz-content" class="ion-padding">
   <div class="ion-text-center welcome-container">
-    <h2>Hello, {{ username }}! 👋</h2>
+    <h2>Hello, {{ username }}! </h2>
     <p>Select a category to start your quiz:</p>
 
     <div class="category-grid">
@@ -35,7 +37,6 @@
             <ion-button
               expand="block"
               class="category-button"
-              [color]="getCategoryColor(cat)"
               (click)="goToQuestion(cat)">
               {{ cat }}
             </ion-button>
@@ -45,11 +46,10 @@
         <ion-row>
           <ion-col size="12">
             <ion-button
-              expand="block"
-              color="secondary"
+           
               class="time-attack-button"
               (click)="goToQuestion('Time Attack')">
-              ⏱️ Time Attack Mode
+               ⏰ Time Attack Mode ⏰
             </ion-button>
           </ion-col>
         </ion-row>

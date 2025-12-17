@@ -1,22 +1,25 @@
 /* Main Background */
 .main-bg {
-  --background: #021a32; /* Dark Navy Background */
-  --color: white;
+  --background: 
+    linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
+    url('/assets/backgroundhome.jpg') center / cover no-repeat;
+  
+  color: white;
 }
 
 /* Header Styling */
 .custom-header {
-  --background: #0d3aa9; /* Lighter Navy for Header */
+  --background: #03346E; /* Lighter Navy for Header */
   --color: white;
   ion-title {
     font-weight: 700;
-    font-size: 1.2rem;
+    font-size: 30px;
   }
 }
 
 /* Top Welcome Card */
 .welcome-card {
-  background-color: #0d3aa9; /* Matches Header */
+  background-color: #03346E; /* Matches Header */
   padding: 30px 20px 50px 20px;
   border-bottom-left-radius: 40px;
   border-bottom-right-radius: 40px;
@@ -26,13 +29,13 @@
   .main-title {
     color: #f1e0ac; /* Cream/Gold Color */
     font-weight: bold;
-    font-size: 1.5rem;
+    font-size: 30px;
     margin-bottom: 15px;
   }
 
   .description {
     color: #e0e0e0;
-    font-size: 0.9rem;
+    font-size: 15px;
     line-height: 1.4;
     margin: 0;
   }
@@ -46,7 +49,7 @@
 
 .tagline {
   color: #f1e0ac; /* Cream/Gold */
-  font-size: 1rem;
+  font-size: 30px;
   font-weight: 600;
   margin-top: 20px;
   margin-bottom: 15px;
@@ -58,31 +61,41 @@
 }
 
 .custom-input {
-  --background: #021a32;
-  --color: white;
-  --placeholder-color: #a0a0a0;
-  --padding-start: 15px;
-  border: 2px solid #f1e0ac; /* Yellow Border */
-  border-radius: 15px;
+  --background: #03346E;           /* Dark blue background */
+  --color: white;                   /* Text color */
+  --placeholder-color: #a0a0a0;    /* Placeholder color */
+  --padding-start: 15px;            /* Padding inside input */
+
+  border: 5px solid #f1e0ac;       /* Yellow border, thinner */
+  border-radius: 5px;              /* Rounded corners */
   font-weight: bold;
   text-align: left;
   margin: 0 auto;
   max-width: 90%;
 }
 
-/* Start Button Styling */
-.start-btn {
-  --background: #6daadd; /* Light Blue */
-  --color: #021a32; /* Dark Text */
-  --border-radius: 15px;
+
+.primary-btn {
+  --background: #6EACDA; /* Light Blue */
+  --color: #03346E; /* Dark Text */
+  --border-radius: 5px;
+
   font-weight: 900;
   letter-spacing: 1px;
   font-size: 1.1rem;
+
   height: 55px;
   max-width: 90%;
   margin: 0 auto;
+
   box-shadow: 0 4px 0 rgba(0,0,0,0.2);
 }
+
+/* Only spacing difference */
+.about-spacing {
+  margin-top: 15px;
+}
+
 
 /* Past Scores Styling */
 .scores-section {
@@ -114,14 +127,7 @@
     font-size: 0.85rem;
   }
 
-  /* Add this to home.page.scss */
-
-.about-btn {
-  margin-top: 15px; /* Space between Start Quiz and About Us */
-  --background: var(--ion-color-medium); /* Grey/Different color to distinguish it */
-  font-weight: bold;
-  letter-spacing: 1px;
-}
+  
 
 /* home.page.scss */
 
