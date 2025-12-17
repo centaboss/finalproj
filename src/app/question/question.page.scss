@@ -2,7 +2,7 @@
 .main-bg {
   --background: 
     linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
-    url('/assets/backgroundhome.jpg') center / cover no-repeat;
+    url('/assets/backgroundhome2.jpg') center / cover no-repeat;
   
   color: white;
 }
@@ -36,3 +36,79 @@
     width: 100%;           /* make it span full width of parent */
     margin: 20px auto 0 auto; /* top spacing + horizontally centered */
 }
+
+.question-text{
+  font-size: 35px;
+}
+
+.choice-item{
+  font-size: 20px;
+}
+
+.next-button{
+  font-size: 25px;
+  margin-top: 20px;
+  color: white;
+}
+
+/* Review Container Background */
+.review-container {
+  background-color: #0d3b66; /* Dark Blue */
+  border-radius: 15px;
+  padding: 20px;
+  color: white; /* default text color */
+  margin-top: 20px;
+}
+
+/* Review Title */
+.review-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Review Items */
+.review-item {
+  --background: transparent; /* remove Ionic gray */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3); /* subtle line */
+  padding: 15px 0;
+}
+
+/* Labels inside review items */
+.review-label {
+  font-size: 1.2rem;
+  color: white;
+}
+
+/* Correct / Incorrect answers */
+.correct {
+  color: #00ff00; /* bright green */
+  font-weight: bold;
+}
+
+.incorrect {
+  color: #ff4d4d; /* red for wrong answer */
+  font-weight: bold;
+}
+
+/* Buttons in review section */
+.review-button {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-top: 15px;
+  --border-radius: 10px;
+}
+
+/* Optional: primary and medium colors override */
+.review-button.primary {
+  --background: #1f77b4; /* deeper blue */
+  --color: white;
+}
+
+.review-button.medium {
+  --background: #6c757d; /* gray/neutral */
+  --color: white;
+}
+

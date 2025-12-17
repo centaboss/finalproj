@@ -51,22 +51,22 @@ export class AboutUsPage implements OnInit {
   // Data for the 3 team members
   teamMembers = [
     {
-      name: 'Member Name 1',
-      role: 'Lead Developer',
-      image: 'https://ionicframework.com/docs/img/demos/avatar.svg', // Placeholder
-      description: 'Expert in Angular and Ionic framework architecture.'
+      name: 'Joshua D. Maducdoc',
+      course: 'BSIT',
+      image: '/assets/pug.webp', 
+      description: 'Future Game Developer.'
     },
     {
-      name: 'Member Name 2',
-      role: 'UI/UX Designer',
-      image: 'https://ionicframework.com/docs/img/demos/avatar.svg', // Placeholder
-      description: 'Designed the dark mode interface and user experience.'
+      name: 'Lance Saldy Ocampo',
+      course: 'BSIT',
+      image: '/assets/punk.webp', // Placeholder
+      description: 'future UI/UX designer.'
     },
     {
-      name: 'Member Name 3',
-      role: 'Backend Engineer',
-      image: 'https://ionicframework.com/docs/img/demos/avatar.svg', // Placeholder
-      description: 'Manages the quiz logic and data structures.'
+      name: 'Vincent Bulaclac',
+      course: 'BSIT',
+      image: '/assets/dog.webp', // Placeholder
+      description: 'Future Web Developer.'
     }
   ];
 

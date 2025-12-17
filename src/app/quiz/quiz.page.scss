@@ -15,27 +15,27 @@ ion-content#quiz-content {
   --ion-color-primary: #123456;      /* Dark blue background */
   --ion-color-secondary: #4a86b9;    /* Medium blue for buttons */
   --ion-color-tertiary: #6aa8d8;     /* Lighter blue for buttons */
-  --ion-color-dark-bg: #1a1a1a;      /* Very dark background */
   --ion-color-light-text: #ffffff;   /* White text */
 }
 
-/* --- SELECT TOPIC PAGE HEADER --- */
 .select-topic-header {
-  --background: #03346E;             /* Dark Blue Background */
-  --color: var(--ion-color-light-text);
-
-  ion-title {
-    font-size: 2rem;                 /* Bigger title */
-    font-weight: 800;
-    letter-spacing: 1px;
-    color: var(--ion-color-light-text); /* White text */
-  }
-
-  ion-back-button,
-  ion-menu-button {
-    color: var(--ion-color-light-text); /* White buttons */
-  }
+  --ion-toolbar-background: #03346E; /* Header background */
+  --color: #FFFFFF;
 }
+
+/* Title */
+.select-topic-header ion-title {
+  color: #FFFFFF;
+  font-size: 2rem;      /* 🔹 Increase text size */
+  letter-spacing: 1px;  /* 🔹 Optional: cleaner look */
+}
+
+/* Buttons */
+.select-topic-header ion-back-button,
+.select-topic-header ion-menu-button {
+  color: #FFFFFF;
+}
+
 
 /* --- GLOBAL BACKGROUND --- */
 ion-content#quiz-content {
@@ -59,34 +59,32 @@ ion-content#quiz-content {
 }
 
 /* --- CATEGORY BUTTONS --- */
-.category-grid ion-button,
-.category-button,
-.time-attack-button {
-  --background: var(--ion-color-primary); /* Primary blue for all buttons */
-  --color: var(--ion-color-light-text);   /* White text */
-  --border-radius: 10px;
+.category-grid ion-button::part(native),
+.category-button::part(native),
+.time-attack-button::part(native) {
+  background: #6EACDA;
+  color: var(--ion-color-light-text);
+  border-radius: 10px;
   font-weight: bold;
   font-size: 1.1rem;
   height: 60px;
   margin: 8px 0;
-  --box-shadow: none;                      /* Flat style */
+  box-shadow: none;
 }
 
 /* Grid buttons larger */
-.category-grid ion-button {
+.category-grid ion-button::part(native) {
   font-size: 30px;
   height: 80px;
-  --padding-top: 25px;
-  --padding-bottom: 25px;
+  padding-top: 25px;
+  padding-bottom: 25px;
 }
 
 /* Time Attack button */
-.time-attack-button {
-  --background: var(--ion-color-primary); /* Primary blue */
-  --color: var(--ion-color-light-text);   /* White text */
-  font-weight: bold;
-  font-size: 1.1rem;
+.time-attack-button::part(native) {
+  background: #6EACDA; /* 🟠 different color if you want */
   height: 60px;
   margin: 15px 0 0 0;
 }
+
 

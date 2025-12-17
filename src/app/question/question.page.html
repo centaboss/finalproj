@@ -4,7 +4,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
+<ion-content class="ion-padding main-bg">
 
   <div *ngIf="!showResult">
     <div class="question-header">
@@ -66,28 +66,29 @@
       Your Score: <strong>{{ score }}</strong> / {{ totalQuestions }}
     </p>
 
-    <h3>Review Answers:</h3>
-    <ion-list>
-      <ion-item *ngFor="let q of questions; let i = index">
-        <ion-label class="ion-text-wrap">
-          <strong>Q{{ i + 1 }}:</strong> {{ q.question }}
-          <p>
-            Your: 
-            <span [style.color]="selectedAnswers[i] === q.answer ? 'green' : 'red'">
-              {{ getUserAnswer(i) }}
-            </span>
-          </p>
-          <p style="color: green">Correct: {{ q.choices[q.answer] }}</p>
-        </ion-label>
-      </ion-item>
-    </ion-list>
+    <div class="review-container ion-padding">
+  <h3 class="review-title">Review Answers:</h3>
+  <ion-list>
+    <ion-item *ngFor="let q of questions; let i = index" class="review-item">
+      <ion-label class="ion-text-wrap review-label">
+        <strong>Q{{ i + 1 }}:</strong> {{ q.question }}
+        <p>
+          Your: 
+          <span [ngClass]="selectedAnswers[i] === q.answer ? 'correct' : 'incorrect'">
+            {{ getUserAnswer(i) }}
+          </span>
+        </p>
+        <p class="correct">Correct: {{ q.choices[q.answer] }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 
-    <ion-button expand="block" color="primary" (click)="retryQuiz()">
-      🔄 Retry This Category
-    </ion-button>
-    <ion-button expand="block" color="medium" (click)="returnCategory()">
-       Return to Categories  
-    </ion-button>
-  </div>
+  <ion-button expand="block" class="review-button primary" (click)="retryQuiz()">
+    Retry This Category
+  </ion-button>
+  <ion-button expand="block" class="review-button medium" (click)="returnCategory()">
+     Return to Categories  
+  </ion-button>
+</div>
 
-</ion-content>
+
