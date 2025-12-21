@@ -48,7 +48,6 @@ import {
 })
 export class AboutUsPage implements OnInit {
 
-  // Data for the 3 team members
   teamMembers = [
     {
       name: 'Joshua D. Maducdoc',
@@ -59,13 +58,13 @@ export class AboutUsPage implements OnInit {
     {
       name: 'Lance Saldy Ocampo',
       course: 'BSIT',
-      image: '/assets/punk.webp', // Placeholder
-      description: 'future UI/UX designer.'
+      image: '/assets/punk.webp', 
+      description: 'Future UI/UX designer.'
     },
     {
       name: 'Vincent Bulaclac',
       course: 'BSIT',
-      image: '/assets/dog.webp', // Placeholder
+      image: '/assets/dog.webp', 
       description: 'Future Web Developer.'
     }
   ];

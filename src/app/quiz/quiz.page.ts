@@ -22,7 +22,7 @@ import {
 })
 export class QuizPage implements OnInit {
   username = '';
-  categories = ['IT-IPT01', 'IT-IPT02', 'IT-IAS01', 'IT-SA01', 'IT-IMO1'];
+  categories = ['IT-IPT01-Mobile Application Development', 'IT-IPT02', 'IT-IAS01', 'IT-SA01', 'IT-IMO1'];
 
   constructor(private global: GlobalData, private router: Router) {}
 
@@ -30,7 +30,6 @@ export class QuizPage implements OnInit {
     this.username = this.global.getUsername();
   }
 
-  // Helper for colors (Switch statement logic can go here or in HTML)
   getCategoryColor(cat: string): string {
     if (cat === 'IT-IMO1') return 'primary';
     if (cat === 'IT-IPT02') return 'tertiary';
@@ -39,7 +38,6 @@ export class QuizPage implements OnInit {
   }
 
   goToQuestion(category: string) {
-    // Navigate to the Question Page and pass the category
     this.router.navigate(['/question', category]);
   }
 }

@@ -1,4 +1,4 @@
-/* Main Background */
+/* home.page.scss Main Background */
 .main-bg {
   --background: 
     linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
@@ -7,9 +7,9 @@
   color: white;
 }
 
-/* Header Styling */
+
 .custom-header {
-  --background: #03346E; /* Lighter Navy for Header */
+  --background: #03346E; 
   --color: white;
   ion-title {
     font-weight: 700;
@@ -17,9 +17,8 @@
   }
 }
 
-/* Top Welcome Card */
 .welcome-card {
-  background-color: #03346E; /* Matches Header */
+  background-color: #03346E; 
   padding: 30px 20px 50px 20px;
   border-bottom-left-radius: 40px;
   border-bottom-right-radius: 40px;
@@ -27,7 +26,7 @@
   box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 
   .main-title {
-    color: #f1e0ac; /* Cream/Gold Color */
+    color: #f1e0ac; 
     font-weight: bold;
     font-size: 30px;
     margin-bottom: 15px;
@@ -41,33 +40,31 @@
   }
 }
 
-/* Interaction Section */
 .interaction-container {
   padding: 20px;
   text-align: center;
 }
 
 .tagline {
-  color: #f1e0ac; /* Cream/Gold */
+  color: #f1e0ac; 
   font-size: 30px;
   font-weight: 600;
   margin-top: 20px;
   margin-bottom: 15px;
 }
 
-/* Custom Input Styling */
 .input-wrapper {
   margin-bottom: 30px;
 }
 
 .custom-input {
-  --background: #03346E;           /* Dark blue background */
-  --color: white;                   /* Text color */
-  --placeholder-color: #a0a0a0;    /* Placeholder color */
-  --padding-start: 15px;            /* Padding inside input */
+  --background: #03346E;          
+  --color: white;                  
+  --placeholder-color: #a0a0a0;   
+  --padding-start: 15px;           
 
-  border: 5px solid #f1e0ac;       /* Yellow border, thinner */
-  border-radius: 5px;              /* Rounded corners */
+  border: 5px solid #f1e0ac;       
+  border-radius: 5px;              
   font-weight: bold;
   text-align: left;
   margin: 0 auto;
@@ -76,8 +73,8 @@
 
 
 .primary-btn {
-  --background: #6EACDA; /* Light Blue */
-  --color: #03346E; /* Dark Text */
+  --background-: #6EACDA; 
+  --color: #03346E; 
   --border-radius: 5px;
 
   font-weight: 900;
@@ -96,8 +93,7 @@
   margin-top: 15px;
 }
 
-
-/* Past Scores Styling */
+ Scores Styling */
 .scores-section {
   margin-top: 30px;
   text-align: left;
@@ -117,7 +113,7 @@
 }
 
 .score-item {
-  --background: rgba(13, 58, 169, 0.3); /* Semi-transparent blue */
+  --background: rgba(13, 58, 169, 0.3); 
   --color: white;
   margin-bottom: 8px;
   border-radius: 10px;
@@ -129,8 +125,6 @@
 
   
 
-/* home.page.scss */
-
 .score-category {
   font-size: 1.1rem;
   font-weight: bold;
@@ -138,8 +132,8 @@
 }
 
 .user-name-highlight {
-  color: var(--ion-color-primary); /* Uses your app's blue color */
-  font-weight: 800; /* Extra bold for the name */
+  color: var(--ion-color-primary); 
+  font-weight: 800; 
   text-transform: uppercase;
 }
 
@@ -153,13 +147,4 @@
   font-size: 0.9rem;
   color: var(--ion-color-medium);
 }
-} 
-
-/* * NOTE: For the circuit board background image shown in your picture,
- * add the image file to your assets folder and uncomment below:
- */
-/*
-.main-bg {
-  --background: #021a32 url('assets/circuit-bg.png') no-repeat bottom center / contain;
 }
-*/

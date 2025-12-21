@@ -1,5 +1,3 @@
-// src/app/questions.ts
-
 export interface Question {
   category: string;
   question: string;

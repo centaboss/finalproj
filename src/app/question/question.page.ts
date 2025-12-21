@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core'; // Added OnDestroy
+import { Component, OnInit, OnDestroy } from '@angular/core'; 
 import { ActivatedRoute, Router } from '@angular/router';
 import { QUESTIONS, Question } from '../questions';
 import { GlobalData } from '../services/global-data';
@@ -24,7 +24,7 @@ import {
     IonList, IonItem, IonLabel
   ]
 })
-export class QuestionPage implements OnInit, OnDestroy { // Added OnDestroy here
+export class QuestionPage implements OnInit, OnDestroy { 
   categoryName = '';
   questions: Question[] = [];
   currentQuestion: Question = { question: 'Loading...', choices: [], answer: 0, category: '' };
@@ -49,33 +49,27 @@ export class QuestionPage implements OnInit, OnDestroy { // Added OnDestroy here
   ) {}
 
   ngOnInit() {
-    // FIX: Changed 'cat' to 'category' to match your app.routes.ts
     this.categoryName = this.route.snapshot.paramMap.get('category') || '';
 
-    // 2. Load Questions
     if (this.categoryName === 'Time Attack') {
       this.isTimeAttack = true;
-      // Shuffle and take 10
+ 
       this.questions = this.shuffle(QUESTIONS).slice(0, 10);
       this.startTimer();
     } else {
-      // Filter by category
       this.questions = QUESTIONS.filter(q => q.category === this.categoryName);
       this.questions = this.shuffle(this.questions);
     }
 
     this.totalQuestions = this.questions.length;
 
-    // 3. Set First Question
     if (this.questions.length > 0) {
       this.currentQuestion = this.questions[0];
     } else {
-       // Handle empty category or error
        this.showResult = true;
     }
   }
 
-  // FIX: Added this to stop the timer if user leaves the page early
   ngOnDestroy() {
     if (this.timerInterval) {
       clearInterval(this.timerInterval);
@@ -99,10 +93,8 @@ export class QuestionPage implements OnInit, OnDestroy { // Added OnDestroy here
   async nextQuestion() {
     if (this.selectedAnswer === null) return;
 
-    // Save answer
     this.selectedAnswers[this.currentQuestionIndex] = this.selectedAnswer;
 
-    // Check correctness
     const isCorrect = this.selectedAnswer === this.currentQuestion.answer;
     if (isCorrect) this.score++;
 
@@ -111,7 +103,7 @@ export class QuestionPage implements OnInit, OnDestroy { // Added OnDestroy here
   duration: 800,
   color: isCorrect ? 'success' : 'danger',
   position: 'bottom',
-  cssClass: 'my-custom-toast', // <--- ADD THIS LINE
+  cssClass: 'my-custom-toast', 
 });
 toast.present();
 
@@ -131,11 +123,10 @@ endQuiz() {
     clearInterval(this.timerInterval);
     this.showResult = true;
     
-    // Get the current username to save it permanently with this score
     const currentUser = this.global.getUsername(); 
 
     this.global.addScore({
-      username: currentUser, // <--- ADD THIS (Saves the name!)
+      username: currentUser, 
       category: this.categoryName,
       score: this.score,
       total: this.totalQuestions,
@@ -144,7 +135,6 @@ endQuiz() {
   }
 
   retryQuiz() {
-    // Simple way to restart: reload the current route
     window.location.reload();
   }
 
@@ -155,7 +145,7 @@ endQuiz() {
   getUserAnswer(index: number): string {
     const ansIdx = this.selectedAnswers[index];
     if (ansIdx === null || ansIdx === undefined) return 'No Answer';
-    return this.questions[index]?.choices[ansIdx] || 'Unknown'; // Added safety check
+    return this.questions[index]?.choices[ansIdx] || 'Unknown'; 
   }
 
   shuffle(array: any[]) {

@@ -54,12 +54,12 @@
 
 
   <div *ngIf="showResult" class="ion-text-center result-container">
-    <h2>🎉 Quiz Completed!</h2>
+    <h2> Quiz Completed!</h2>
     
     <div [ngSwitch]="true" class="ion-margin-bottom">
-      <h2 *ngSwitchCase="score === totalQuestions" style="color: gold;">🏆 Perfect!</h2>
-      <h2 *ngSwitchCase="score > (totalQuestions / 2)" style="color: green;">👍 Good Job!</h2>
-      <h2 *ngSwitchDefault style="color: tomato;">📚 Study More!</h2>
+      <h2 *ngSwitchCase="score === totalQuestions" style="color: gold;"> Perfect!</h2>
+      <h2 *ngSwitchCase="score > (totalQuestions / 2)" style="color: green;"> Good Job!</h2>
+      <h2 *ngSwitchDefault style="color: tomato;">Study More!</h2>
     </div>
 
     <p class="score-text">
